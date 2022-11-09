@@ -1,23 +1,25 @@
 package com.agnieszka.reservationapp.vetapp.registration;
 
 import com.agnieszka.reservationapp.vetapp.appUser.AppUser;
-import com.agnieszka.reservationapp.vetapp.appUser.UserRole;
-import com.agnieszka.reservationapp.vetapp.appUser.UserService;
+import com.agnieszka.reservationapp.vetapp.appUser.AppUserRole;
+import com.agnieszka.reservationapp.vetapp.appUser.AppUserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Service
-class RegistrationService {
+public class RegistrationService {
 
-    private final UserService userService;
+    private final AppUserService appUserService;
     private final EmailValidator emailValidator;
 
 
-    public AppUser register(final RegistrationRequest request) {
+    public ResponseEntity<AppUser> register(final RegistrationRequest request) {
         final String email = request.getEmail();
         if (!emailValidator.test(email)) {
-            throw new IllegalArgumentException("Email address not valid");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
             AppUser appUser = new AppUser
                     (
@@ -25,10 +27,12 @@ class RegistrationService {
                             request.getLastName(),
                             request.getEmail(),
                             request.getPassword(),
-                            UserRole.USER
+                            AppUserRole.USER
                     );
 
-        userService.signUpUser(appUser);
-        return appUser;
+        appUserService.signUpUser(appUser);
+
+
+        return ResponseEntity.ok(appUser);
     }
 }

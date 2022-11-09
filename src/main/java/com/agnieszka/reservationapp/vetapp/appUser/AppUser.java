@@ -21,37 +21,38 @@ public class AppUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     private String firstName;
     private String lastName;
 
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
-    private UserRole userRole;
+    private AppUserRole appUserRole;
 
-    private Boolean locked = true;
+    private Boolean locked = false;
 
-    private Boolean enabled = true;
+    private Boolean enabled = false;
 
     public AppUser(
             final String firstName,
             final String lastName,
             final String email,
             final String password,
-            final UserRole userRole
+            final AppUserRole appUserRole
            ) {
 
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.userRole = userRole;
+        this.appUserRole = appUserRole;
+
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole.name());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
         return Collections.singleton(authority);
     }
 
@@ -65,14 +66,6 @@ public class AppUser implements UserDetails {
         return email;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -80,7 +73,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return locked;
     }
 
     @Override
@@ -90,6 +83,6 @@ public class AppUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }

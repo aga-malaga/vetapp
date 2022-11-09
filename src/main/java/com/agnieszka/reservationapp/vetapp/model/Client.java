@@ -1,6 +1,11 @@
 package com.agnieszka.reservationapp.vetapp.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Objects;
+@Getter
+@Setter
 
 public class Client {
 
@@ -18,29 +23,6 @@ public class Client {
         this.surname = surname;
     }
 
-    Long getId() {
-        return id;
-    }
-
-    void setId(final Long id) {
-        this.id = id;
-    }
-
-    String getName() {
-        return name;
-    }
-
-    void setName(final String name) {
-        this.name = name;
-    }
-
-    String getSurname() {
-        return surname;
-    }
-
-    void setSurname(final String surname) {
-        this.surname = surname;
-    }
 
     @Override
     public boolean equals(final Object o) {

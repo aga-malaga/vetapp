@@ -1,6 +1,6 @@
 package com.agnieszka.reservationapp.vetapp.security.config;
 
-import com.agnieszka.reservationapp.vetapp.appUser.UserService;
+import com.agnieszka.reservationapp.vetapp.appUser.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 class WebSecurityConfig  {
 
-    private final UserService service;
+    private final AppUserService service;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 

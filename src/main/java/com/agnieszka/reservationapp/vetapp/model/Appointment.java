@@ -9,7 +9,7 @@ public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column(columnDefinition = "timestamptz")
     private ZonedDateTime dateTime;
@@ -17,8 +17,13 @@ public class Appointment {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @OneToOne
-    @JoinColumn(name = "doctor_id", referencedColumnName = "id")
+//    @OneToOne
+//    @JoinColumn(name = "doctor_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(
+            nullable = false,
+            name = "doctor_id"
+    )
     private Doctor doctor;
 
 //    private Client client;
@@ -26,7 +31,7 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(final Integer id, final ZonedDateTime dateTime, final String description, final Doctor doctor) {
+    public Appointment(final Long id, final ZonedDateTime dateTime, final String description, final Doctor doctor) {
         this.id = id;
         this.dateTime = dateTime;
         this.description = description;

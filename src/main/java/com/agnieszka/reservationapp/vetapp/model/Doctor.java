@@ -1,16 +1,24 @@
 package com.agnieszka.reservationapp.vetapp.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
+@Getter
+@Setter
+@ToString
 @Entity
 @Table
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     @NotBlank
     private String name;
     @NotBlank
@@ -18,9 +26,6 @@ public class Doctor {
     @NotNull
     @Enumerated(EnumType.STRING)
     private MedicalSpecialty medicalSpecialty;
-
-    @OneToOne(mappedBy = "doctor")
-    private Appointment appointment;
 
     public Doctor() {
     }
@@ -31,58 +36,16 @@ public class Doctor {
         this.medicalSpecialty = medicalSpecialty;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(final String surName) {
-        this.surname = surName;
-    }
-
-    public MedicalSpecialty getMedicalSpecialty() {
-        return medicalSpecialty;
-    }
-
-    public void setMedicalSpecialty(final MedicalSpecialty medicalSpecialty) {
-        this.medicalSpecialty = medicalSpecialty;
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         final Doctor doctor = (Doctor) o;
-        return Objects.equals(id, doctor.id) && Objects.equals(name, doctor.name) && Objects.equals(surname, doctor.surname) && Objects.equals(medicalSpecialty, doctor.medicalSpecialty);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, surname, medicalSpecialty);
-    }
-
-    @Override
-    public String toString() {
-        return "Doctor{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", medicalSpecialty=" + medicalSpecialty +
-                '}';
+        return id != null && Objects.equals(id, doctor.id);
     }
 }

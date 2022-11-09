@@ -9,7 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-class RegistrationRequest {
+public class RegistrationRequest {
     private final String firstName;
     private final String lastName;
     private final String email;

@@ -35,7 +35,7 @@ class DoctorController {
     }
 
     @GetMapping("doctors/{id}")
-    ResponseEntity<Doctor> getDoctor(@PathVariable Integer id){
+    ResponseEntity<Doctor> getDoctor(@PathVariable Long id){
         if (!doctorRepository.existsById(id)){
             return ResponseEntity.notFound().build();
         }
@@ -45,7 +45,7 @@ class DoctorController {
     }
 
     @PutMapping("/doctors/{id}")
-    public ResponseEntity<Doctor> updateDoctor(@PathVariable Integer id, @RequestBody @Valid Doctor updatedDoctor){
+    public ResponseEntity<Doctor> updateDoctor(@PathVariable Long id, @RequestBody @Valid Doctor updatedDoctor){
         if (!doctorRepository.existsById(id)){
             return ResponseEntity.notFound().build();
         }

@@ -1,6 +1,6 @@
 package com.agnieszka.reservationapp.vetapp.appUser;
 
-public enum UserRole {
+public enum AppUserRole {
     USER,
     ADMIN,
     DOCTOR,
