@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 
 ### STS ###
+env.properties
 .apt_generated
 .classpath
 .factorypath
