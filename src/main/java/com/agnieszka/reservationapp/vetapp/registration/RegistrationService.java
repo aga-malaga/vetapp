@@ -42,7 +42,7 @@ public class RegistrationService {
 
         final String token = appUserService.signUpUser(appUser);
 
-        String link = "http://localhost8080/confirm?token=" + token;
+        String link = "http://localhost:8080/api/registration/confirm?token=" + token;
         emailSender.send(
                 request.getEmail(),
                 emailSender.buildEmail(request.getFirstName(), link));

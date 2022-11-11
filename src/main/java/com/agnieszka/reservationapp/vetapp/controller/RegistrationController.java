@@ -26,7 +26,7 @@ class RegistrationController {
         return ResponseEntity.created(URI.create("/" + appUser.getId())).body(appUser);
     }
 
-    @GetMapping("/confirm")
+    @GetMapping(path = "confirm")
     public String confirm(@RequestParam("token") String token){
         return registrationService.confirmToken(token);
     }

@@ -23,12 +23,14 @@ class EmailService implements EmailSender {
     @Async
     public void send(final String to, final String email) {
         try {
+            LOGGER.info("creating a message");
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
             helper.setText(email, true);
             helper.setTo(to);
             helper.setSubject("Confirm your email");
             helper.setFrom("hello@vetapp.com");
+            mailSender.send(mimeMessage);
         } catch (MessagingException e) {
             LOGGER.error("failed to send email", e);
             throw new IllegalStateException("failed to send email");
