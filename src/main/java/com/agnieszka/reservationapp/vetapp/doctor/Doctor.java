@@ -1,6 +1,8 @@
-package com.agnieszka.reservationapp.vetapp.model;
+package com.agnieszka.reservationapp.vetapp.doctor;
 
+import com.agnieszka.reservationapp.vetapp.model.MedicalSpecialty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
@@ -10,11 +12,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
+@Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @ToString
-@Entity
-@Table
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,10 +29,8 @@ public class Doctor {
     @Enumerated(EnumType.STRING)
     private MedicalSpecialty medicalSpecialty;
 
-    public Doctor() {
-    }
 
-    Doctor(final Integer id, final String name, final String surname, final MedicalSpecialty medicalSpecialty) {
+    Doctor(final Long id, final String name, final String surname, final MedicalSpecialty medicalSpecialty) {
         this.name = name;
         this.surname = surname;
         this.medicalSpecialty = medicalSpecialty;

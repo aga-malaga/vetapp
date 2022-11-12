@@ -1,6 +1,6 @@
-package com.agnieszka.reservationapp.vetapp.repository;
+package com.agnieszka.reservationapp.vetapp.doctor;
 
-import com.agnieszka.reservationapp.vetapp.model.Doctor;
+import com.agnieszka.reservationapp.vetapp.doctor.Doctor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

@@ -1,4 +1,4 @@
-package com.agnieszka.reservationapp.vetapp.controller;
+package com.agnieszka.reservationapp.vetapp.registration;
 
 import com.agnieszka.reservationapp.vetapp.appUser.AppUser;
 import com.agnieszka.reservationapp.vetapp.registration.RegistrationRequest;

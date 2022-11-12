@@ -1,7 +1,5 @@
-package com.agnieszka.reservationapp.vetapp.controller;
+package com.agnieszka.reservationapp.vetapp.doctor;
 
-import com.agnieszka.reservationapp.vetapp.model.Doctor;
-import com.agnieszka.reservationapp.vetapp.repository.DoctorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +11,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequestMapping(path = "/api/doctors")
 class DoctorController {
 
     private static final Logger logger = LoggerFactory.getLogger(DoctorController.class);
@@ -22,19 +21,19 @@ class DoctorController {
         this.doctorRepository = doctorRepository;
     }
 
-    @GetMapping(value = "/doctors", params = {"!sort", "!page", "!size"})
+    @GetMapping(params = {"!sort", "!page", "!size"})
     public ResponseEntity<List<Doctor>> getAllDoctors() {
         logger.warn("Exposing all the doctors!");
         return ResponseEntity.ok(doctorRepository.findAll());
     }
 
-    @GetMapping("/doctors")
+    @GetMapping
     public ResponseEntity<List<Doctor>> getAllDoctors(Pageable p) {
         logger.info("Custom pageable");
         return ResponseEntity.ok(doctorRepository.findAll(p).getContent());
     }
 
-    @GetMapping("doctors/{id}")
+    @GetMapping("/{id}")
     ResponseEntity<Doctor> getDoctor(@PathVariable Long id){
         if (!doctorRepository.existsById(id)){
             return ResponseEntity.notFound().build();
@@ -44,7 +43,7 @@ class DoctorController {
                   .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/doctors/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Doctor> updateDoctor(@PathVariable Long id, @RequestBody @Valid Doctor updatedDoctor){
         if (!doctorRepository.existsById(id)){
             return ResponseEntity.notFound().build();
@@ -55,7 +54,7 @@ class DoctorController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("doctors")
+    @PostMapping
     ResponseEntity<Doctor> createDoctor(@RequestBody @Valid Doctor doctor){
         Doctor created = doctorRepository.save(doctor);
         return ResponseEntity.created(URI.create("/" + created.getId())).body(created);
