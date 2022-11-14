@@ -1,5 +1,7 @@
 package com.agnieszka.reservationapp.vetapp.doctor;
 
+import com.agnieszka.reservationapp.vetapp.appointment.ScheduleRequest;
+import com.agnieszka.reservationapp.vetapp.appointment.TimeSlot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
@@ -16,9 +18,11 @@ class DoctorController {
 
     private static final Logger logger = LoggerFactory.getLogger(DoctorController.class);
     private final DoctorRepository doctorRepository;
+    private final DoctorService doctorService;
 
-    DoctorController(final DoctorRepository doctorRepository) {
+    DoctorController(final DoctorRepository doctorRepository, final DoctorService doctorService) {
         this.doctorRepository = doctorRepository;
+        this.doctorService = doctorService;
     }
 
     @GetMapping(params = {"!sort", "!page", "!size"})
@@ -58,6 +62,16 @@ class DoctorController {
     ResponseEntity<Doctor> createDoctor(@RequestBody @Valid Doctor doctor){
         Doctor created = doctorRepository.save(doctor);
         return ResponseEntity.created(URI.create("/" + created.getId())).body(created);
+    }
+
+    @PostMapping("/schedule")
+    public List<TimeSlot> createSchedule(@RequestBody @Valid ScheduleRequest request){
+        return doctorService.createSchedule(request);
+
+    }
+    @GetMapping("/schedule")
+    public List<TimeSlot> getSchedule(){
+        return doctorService.getSchedule();
     }
 
 
