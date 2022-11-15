@@ -1,6 +1,9 @@
-package com.agnieszka.reservationapp.vetapp.model;
+package com.agnieszka.reservationapp.vetapp.client;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Objects;

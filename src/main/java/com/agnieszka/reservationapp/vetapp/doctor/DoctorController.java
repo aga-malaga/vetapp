@@ -13,7 +13,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/doctors")
+@RequestMapping(path = "/api/doctor")
 class DoctorController {
 
     private static final Logger logger = LoggerFactory.getLogger(DoctorController.class);
@@ -43,7 +43,7 @@ class DoctorController {
             return ResponseEntity.notFound().build();
         }
         return doctorRepository.findById(id)
-                .map(doctor -> ResponseEntity.ok(doctor))
+                .map(ResponseEntity::ok)
                   .orElse(ResponseEntity.notFound().build());
     }
 

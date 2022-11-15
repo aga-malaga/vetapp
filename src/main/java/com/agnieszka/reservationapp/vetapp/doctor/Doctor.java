@@ -1,6 +1,5 @@
 package com.agnieszka.reservationapp.vetapp.doctor;
 
-import com.agnieszka.reservationapp.vetapp.model.MedicalSpecialty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

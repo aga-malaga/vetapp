@@ -28,7 +28,7 @@ class WebSecurityConfig  {
             .authorizeRequests()
             .antMatchers("/api/registration/**")
             .permitAll()
-            .antMatchers("/api/doctors/**")
+            .antMatchers("/api/**")
             .permitAll()
             .anyRequest()
             .authenticated().and()

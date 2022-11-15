@@ -1,9 +1,9 @@
-package com.agnieszka.reservationapp.vetapp.model;
+package com.agnieszka.reservationapp.vetapp.doctor;
 
 public enum MedicalSpecialty {
     DENTISTRY,
     DERMATOLOGY,
-    DIAGNOSCTIC_IMAGING,
+    DIAGNOSTIC_IMAGING,
     NEUROLOGY,
     INTERNAL_MEDICINE,
     ONCOLOGY,

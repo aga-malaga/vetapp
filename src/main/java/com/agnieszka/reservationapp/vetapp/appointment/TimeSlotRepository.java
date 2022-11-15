@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-interface TimeSlotRepository {
+public interface TimeSlotRepository {
 
     List<TimeSlot> findAll();
 

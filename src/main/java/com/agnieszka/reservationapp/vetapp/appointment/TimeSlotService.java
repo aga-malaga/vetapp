@@ -32,6 +32,7 @@ public class TimeSlotService {
                             start.plusMinutes(intervaL),
                             doctor
                     ));
+            slots.add(timeSlot);
             start = start.plusMinutes(intervaL);
             count++;
         }

@@ -33,6 +33,8 @@ public class TimeSlot {
     )
     private Doctor doctor;
 
+    private boolean booked = false;
+
     public TimeSlot(final LocalDateTime start, final LocalTime end, final Doctor doctor) {
         this.start = start;
         this.end = end;

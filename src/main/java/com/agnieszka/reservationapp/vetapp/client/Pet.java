@@ -1,4 +1,4 @@
-package com.agnieszka.reservationapp.vetapp.model;
+package com.agnieszka.reservationapp.vetapp.client;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
