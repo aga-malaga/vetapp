@@ -6,9 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +22,14 @@ public class TimeSlotService {
 
     public List<TimeSlot> createSchedule(LocalDate date, LocalTime start, LocalTime stop, String interval, Doctor doctor) {
         long intervaL = Long.parseLong(interval);
+        ZoneId z = ZoneId.of("Europe/Warsaw");
         List<TimeSlot> slots = new ArrayList<>();
         int count = 0;
         while (start.isBefore(stop)) {
             final TimeSlot timeSlot = timeSlotRepository.save(
                     new TimeSlot(
-                            LocalDateTime.of(date, start),
-                            start.plusMinutes(intervaL),
+                            ZonedDateTime.of(date, start, z),
+                            ZonedDateTime.of(date, start, z).plus(intervaL, ChronoUnit.MINUTES),
                             doctor
                     ));
             slots.add(timeSlot);

@@ -4,6 +4,7 @@ import com.agnieszka.reservationapp.vetapp.appointment.Appointment;
 import com.agnieszka.reservationapp.vetapp.appointment.AppointmentRepository;
 import com.agnieszka.reservationapp.vetapp.appointment.TimeSlotRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 class ClientService {
@@ -19,8 +20,24 @@ class ClientService {
         this.timeSlotRepository = timeSlotRepository;
     }
 
-    public void makeAppointment(Appointment appointment){
-        appointmentRepository.bookTimeSlot(appointment.getTimeSlot().getStart());
-        appointmentRepository.save(appointment);
+    @Transactional
+    public Appointment makeAppointment(Appointment request){
+        final boolean present = appointmentRepository
+                .findByDateTime(request.getDateTime())
+                .isPresent();
+
+        if (present) {
+            throw new IllegalStateException("This appointment is already booked");
+        }
+
+
+        appointmentRepository.bookTimeSlot(request.getDateTime());
+        Appointment appointment = new Appointment(
+                request.getDescription(),
+                request.getDateTime(),
+                clientRepository.findById(request.getClient().getId()).orElseThrow()
+        );
+        final Appointment savedAppointment = appointmentRepository.save(appointment);
+        return savedAppointment;
     }
 }

@@ -3,6 +3,9 @@ package com.agnieszka.reservationapp.vetapp.registration;
 import com.agnieszka.reservationapp.vetapp.appUser.AppUser;
 import com.agnieszka.reservationapp.vetapp.appUser.AppUserRole;
 import com.agnieszka.reservationapp.vetapp.appUser.AppUserService;
+import com.agnieszka.reservationapp.vetapp.client.Client;
+import com.agnieszka.reservationapp.vetapp.client.ClientRepository;
+import com.agnieszka.reservationapp.vetapp.client.Pet;
 import com.agnieszka.reservationapp.vetapp.email.EmailSender;
 import com.agnieszka.reservationapp.vetapp.registration.token.ConfirmationToken;
 import com.agnieszka.reservationapp.vetapp.registration.token.ConfirmationTokenService;
@@ -21,6 +24,8 @@ public class RegistrationService {
     private final AppUserService appUserService;
     private final EmailValidator emailValidator;
 
+    private final ClientRepository clientRepository;
+
     private final ConfirmationTokenService confirmationTokenService;
 
     private final EmailSender emailSender;
@@ -37,7 +42,7 @@ public class RegistrationService {
                         request.getLastName(),
                         request.getEmail(),
                         request.getPassword(),
-                        AppUserRole.USER
+                        AppUserRole.CLIENT
                 );
 
         final String token = appUserService.signUpUser(appUser);
@@ -47,6 +52,11 @@ public class RegistrationService {
                 request.getEmail(),
                 emailSender.buildEmail(request.getFirstName(), link));
 
+        Client client = new Client(
+                appUser.getFirstName(),
+                appUser.getLastName()
+        );
+        clientRepository.save(client);
 
         return ResponseEntity.ok(appUser);
     }

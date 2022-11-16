@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -20,18 +21,16 @@ public class Client {
     private String name;
     private String surname;
 
-    @ManyToOne
-    @JoinColumn(
-            nullable = false,
-            name = "pet_id"
-    )
-    private Pet pet;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(
+//            nullable = true,
+//            name = "pet_id"
+//    )
+//    private Pet pet;
 
-    public Client(final Long id, final String name, final String surname, final Pet pet) {
-        this.id = id;
+    public Client(final String name, final String surname) {
         this.name = name;
         this.surname = surname;
-        this.pet = pet;
     }
 
     @Override

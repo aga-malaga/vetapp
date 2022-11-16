@@ -1,6 +1,5 @@
 package com.agnieszka.reservationapp.vetapp.doctor;
 
-import com.agnieszka.reservationapp.vetapp.appointment.ScheduleRequest;
 import com.agnieszka.reservationapp.vetapp.appointment.TimeSlot;
 import com.agnieszka.reservationapp.vetapp.appointment.TimeSlotService;
 import org.springframework.stereotype.Service;
@@ -52,7 +51,7 @@ class DoctorService {
                 request.getStart(),
                 request.getStop(),
                 request.getInterval(),
-                request.getDoctor()
+                doctorRepository.findById(request.getDoctor_id()).orElseThrow(IllegalArgumentException::new)
         );
     }
 

@@ -4,8 +4,7 @@ import com.agnieszka.reservationapp.vetapp.doctor.Doctor;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 @Getter
@@ -21,11 +20,11 @@ public class TimeSlot {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(columnDefinition = "timestamptz", name = "start_of_visit")
-    private LocalDateTime start;
+    @Column(columnDefinition = "timestamp with time zone", name = "start_of_visit")
+    private ZonedDateTime start;
 
-    @Column(columnDefinition = "time", name = "end_of_visit")
-    private LocalTime end;
+    @Column(columnDefinition = "timestamp with time zone", name = "end_of_visit")
+    private ZonedDateTime end;
     @ManyToOne
     @JoinColumn(
             nullable = false,
@@ -35,7 +34,7 @@ public class TimeSlot {
 
     private boolean booked = false;
 
-    public TimeSlot(final LocalDateTime start, final LocalTime end, final Doctor doctor) {
+    public TimeSlot(final ZonedDateTime start, final ZonedDateTime end, final Doctor doctor) {
         this.start = start;
         this.end = end;
         this.doctor = doctor;
@@ -46,11 +45,11 @@ public class TimeSlot {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final TimeSlot timeSlot = (TimeSlot) o;
-        return Objects.equals(id, timeSlot.id) && Objects.equals(start, timeSlot.start) && Objects.equals(end, timeSlot.end) && Objects.equals(doctor, timeSlot.doctor);
+        return booked == timeSlot.booked && Objects.equals(id, timeSlot.id) && Objects.equals(start, timeSlot.start) && Objects.equals(end, timeSlot.end) && Objects.equals(doctor, timeSlot.doctor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, start, end, doctor);
+        return Objects.hash(id, start, end, doctor, booked);
     }
 }

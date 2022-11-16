@@ -1,4 +1,4 @@
-package com.agnieszka.reservationapp.vetapp.appointment;
+package com.agnieszka.reservationapp.vetapp.doctor;
 
 import com.agnieszka.reservationapp.vetapp.doctor.Doctor;
 import lombok.Getter;
@@ -13,5 +13,5 @@ public class ScheduleRequest {
     private LocalTime start;
     private LocalTime stop;
     private String interval;
-    private  Doctor doctor;
+    private Long doctor_id;
 }

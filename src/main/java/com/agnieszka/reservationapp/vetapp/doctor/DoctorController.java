@@ -1,6 +1,5 @@
 package com.agnieszka.reservationapp.vetapp.doctor;
 
-import com.agnieszka.reservationapp.vetapp.appointment.ScheduleRequest;
 import com.agnieszka.reservationapp.vetapp.appointment.TimeSlot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +37,7 @@ class DoctorController {
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<Doctor> getDoctor(@PathVariable Long id){
+    public ResponseEntity<Doctor> getDoctor(@PathVariable Long id){
         if (!doctorRepository.existsById(id)){
             return ResponseEntity.notFound().build();
         }
@@ -59,7 +58,7 @@ class DoctorController {
     }
 
     @PostMapping
-    ResponseEntity<Doctor> createDoctor(@RequestBody @Valid Doctor doctor){
+    public ResponseEntity<Doctor> createDoctor(@RequestBody @Valid Doctor doctor){
         Doctor created = doctorRepository.save(doctor);
         return ResponseEntity.created(URI.create("/" + created.getId())).body(created);
     }
