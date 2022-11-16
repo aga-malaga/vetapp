@@ -3,6 +3,7 @@ package com.agnieszka.reservationapp.vetapp.client;
 import com.agnieszka.reservationapp.vetapp.appUser.AppUserRepository;
 import com.agnieszka.reservationapp.vetapp.appointment.Appointment;
 import com.agnieszka.reservationapp.vetapp.appointment.AppointmentRepository;
+import com.agnieszka.reservationapp.vetapp.appointment.TimeSlotRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,8 @@ class ClientController {
 
     private final AppointmentRepository appointmentRepository;
 
+    private final TimeSlotRepository timeSlotRepository;
+
     @GetMapping("/{id}")
     public ResponseEntity<Client> getClient(@PathVariable Long id){
         return clientRepository.findById(id).map(ResponseEntity::ok)
@@ -35,6 +38,9 @@ class ClientController {
 
     @PostMapping("/appointment")
     public ResponseEntity<Appointment> makeAppointment(@RequestBody @Valid Appointment appointment){
+        if (timeSlotRepository.findByStart(appointment.getDateTime()).isBooked()){
+          return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.ok(clientService.makeAppointment(appointment));
     }
 
