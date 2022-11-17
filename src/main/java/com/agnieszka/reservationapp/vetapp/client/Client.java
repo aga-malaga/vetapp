@@ -1,10 +1,10 @@
 package com.agnieszka.reservationapp.vetapp.client;
 
+import com.agnieszka.reservationapp.vetapp.client.pet.Pet;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -16,17 +16,17 @@ import java.util.Objects;
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String surname;
 
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(
-//            nullable = true,
-//            name = "pet_id"
-//    )
-//    private Pet pet;
+    @OneToOne
+    @JoinColumn(
+            nullable = true,
+            name = "pet_id"
+    )
+    private Pet pet;
 
     public Client(final String name, final String surname) {
         this.name = name;

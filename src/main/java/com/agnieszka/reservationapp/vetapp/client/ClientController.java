@@ -20,34 +20,36 @@ class ClientController {
 
     private final ClientRepository clientRepository;
 
-    private  final AppUserRepository appUserRepository;
+    private final AppUserRepository appUserRepository;
 
     private final AppointmentRepository appointmentRepository;
 
     private final TimeSlotRepository timeSlotRepository;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Client> getClient(@PathVariable Long id){
+    public ResponseEntity<Client> getClient(@PathVariable Long id) {
         return clientRepository.findById(id).map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
     @GetMapping
-    public ResponseEntity<List<Client>> getClients(){
+    public ResponseEntity<List<Client>> getClients() {
         return ResponseEntity.ok(clientRepository.findAll());
     }
 
     @PostMapping("/appointment")
-    public ResponseEntity<Appointment> makeAppointment(@RequestBody @Valid Appointment appointment){
-        if (timeSlotRepository.findByStart(appointment.getDateTime()).isBooked()){
-          return ResponseEntity.badRequest().build();
+    public ResponseEntity<Appointment> makeAppointment(@RequestBody @Valid Appointment appointment) {
+        if (timeSlotRepository.findByStart(appointment.getDateTime()).isBooked()) {
+            return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(clientService.makeAppointment(appointment));
     }
 
     @GetMapping("/appointments")
-    public ResponseEntity<List<Appointment>> getAllAppointments(){
+    public ResponseEntity<List<Appointment>> getAllAppointments() {
         return ResponseEntity.ok(appointmentRepository.findAll());
     }
+
 
 
 }

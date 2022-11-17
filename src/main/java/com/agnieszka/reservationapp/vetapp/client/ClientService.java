@@ -37,7 +37,9 @@ class ClientService {
                 request.getDateTime(),
                 clientRepository.findById(request.getClient().getId()).orElseThrow()
         );
-        final Appointment savedAppointment = appointmentRepository.save(appointment);
-        return savedAppointment;
+        appointment.setTimeSlot(timeSlotRepository.findByStart(request.getDateTime()));
+        return appointmentRepository.save(appointment);
     }
+
+
 }

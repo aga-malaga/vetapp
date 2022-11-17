@@ -1,10 +1,10 @@
-package com.agnieszka.reservationapp.vetapp.client;
+package com.agnieszka.reservationapp.vetapp.client.pet;
 
+import com.agnieszka.reservationapp.vetapp.client.Client;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -18,7 +18,6 @@ public
 class Pet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String species;
 
@@ -28,19 +27,19 @@ class Pet {
 
     private String age;
 
-    @ManyToOne
+    @OneToOne
+    @MapsId
     @JoinColumn(
             nullable = true,
             name = "owner_id"
     )
     private Client owner;
 
-    public Pet(final Long id, final String species, final String sex, final String age, final Client owner) {
-        this.id = id;
+    public Pet(final String species, final String name, final String sex, final String age) {
         this.species = species;
+        this.name = name;
         this.sex = sex;
         this.age = age;
-        this.owner = owner;
     }
 
     @Override

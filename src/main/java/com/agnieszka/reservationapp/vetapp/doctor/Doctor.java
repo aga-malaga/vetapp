@@ -1,5 +1,6 @@
 package com.agnieszka.reservationapp.vetapp.doctor;
 
+import com.agnieszka.reservationapp.vetapp.appointment.TimeSlot;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,7 +19,7 @@ import java.util.Objects;
 @ToString
 public class Doctor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
     private String name;

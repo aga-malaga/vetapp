@@ -16,20 +16,18 @@ import java.time.ZonedDateTime;
 public class Appointment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(columnDefinition = "TEXT")
     private String description;
     @Column(columnDefinition = "timestamp with time zone")
     private ZonedDateTime dateTime;
-    //    @ManyToOne
-//    @JoinColumn(
-//            nullable = false,
-//            name = "timeslot_id"
-//    )
-//    private TimeSlot timeSlot;
-    @ManyToOne
+
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @MapsId
+    @JoinColumn(name = "id")
+    private TimeSlot timeSlot;
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(
             nullable = false,
             name = "client_id"

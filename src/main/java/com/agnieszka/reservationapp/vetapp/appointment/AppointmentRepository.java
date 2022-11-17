@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +20,14 @@ public interface AppointmentRepository {
 
     Optional<List<Appointment>> findByClient(Client client);
 
+    Optional<Appointment> findById(Long id);
+
+
     List<Appointment> findAll();
+
+    void deleteById(Long id);
+
+    void delete(Appointment entity);
 
 
     @Transactional

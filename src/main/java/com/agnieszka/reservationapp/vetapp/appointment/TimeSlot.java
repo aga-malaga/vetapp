@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,7 +18,7 @@ import java.util.Objects;
 public class TimeSlot {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(columnDefinition = "timestamp with time zone", name = "start_of_visit")
@@ -25,7 +26,7 @@ public class TimeSlot {
 
     @Column(columnDefinition = "timestamp with time zone", name = "end_of_visit")
     private ZonedDateTime end;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(
             nullable = false,
             name = "doctor_id"
@@ -33,6 +34,7 @@ public class TimeSlot {
     private Doctor doctor;
 
     private boolean booked = false;
+
 
     public TimeSlot(final ZonedDateTime start, final ZonedDateTime end, final Doctor doctor) {
         this.start = start;

@@ -5,7 +5,6 @@ import com.agnieszka.reservationapp.vetapp.appUser.AppUserRole;
 import com.agnieszka.reservationapp.vetapp.appUser.AppUserService;
 import com.agnieszka.reservationapp.vetapp.client.Client;
 import com.agnieszka.reservationapp.vetapp.client.ClientRepository;
-import com.agnieszka.reservationapp.vetapp.client.Pet;
 import com.agnieszka.reservationapp.vetapp.email.EmailSender;
 import com.agnieszka.reservationapp.vetapp.registration.token.ConfirmationToken;
 import com.agnieszka.reservationapp.vetapp.registration.token.ConfirmationTokenService;
