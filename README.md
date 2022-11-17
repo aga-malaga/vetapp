@@ -8,6 +8,6 @@ The doctors can create their schedules according to their availibility on a part
 
 ## Technologies
 Project is created with:
-* Java 17
+* Java 11
 * Apache Maven 3.8.5
 * Spring Boot 2.7.4
