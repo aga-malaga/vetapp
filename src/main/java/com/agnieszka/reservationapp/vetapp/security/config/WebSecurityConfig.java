@@ -1,6 +1,7 @@
 package com.agnieszka.reservationapp.vetapp.security.config;
 
-import com.agnieszka.reservationapp.vetapp.appUser.AppUserService;
+import com.agnieszka.reservationapp.vetapp.model.appUser.AppUserRole;
+import com.agnieszka.reservationapp.vetapp.service.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,8 +29,8 @@ class WebSecurityConfig  {
             .authorizeRequests()
             .antMatchers("/api/registration/**")
             .permitAll()
-            .antMatchers("/api/**")
-            .permitAll()
+            .antMatchers("/api/client").hasRole(AppUserRole.CLIENT.name())
+            .antMatchers("/api/doctor").hasRole(AppUserRole.DOCTOR.name())
             .anyRequest()
             .authenticated().and()
             .formLogin()
