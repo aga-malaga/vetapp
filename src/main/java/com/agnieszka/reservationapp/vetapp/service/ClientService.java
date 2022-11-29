@@ -1,14 +1,11 @@
 package com.agnieszka.reservationapp.vetapp.service;
 
 import com.agnieszka.reservationapp.vetapp.model.Appointment;
-import com.agnieszka.reservationapp.vetapp.model.Pet;
 import com.agnieszka.reservationapp.vetapp.repository.AppointmentRepository;
-import com.agnieszka.reservationapp.vetapp.repository.TimeSlotRepository;
 import com.agnieszka.reservationapp.vetapp.repository.ClientRepository;
+import com.agnieszka.reservationapp.vetapp.repository.TimeSlotRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.security.Principal;
 
 @Service
 public class ClientService {

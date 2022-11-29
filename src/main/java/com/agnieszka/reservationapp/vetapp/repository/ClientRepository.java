@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 @Transactional
 @Repository
 public interface ClientRepository {
@@ -27,5 +29,7 @@ public interface ClientRepository {
     Client save(Client entity);
 
     void delete(Client entity);
+
+
 
 }

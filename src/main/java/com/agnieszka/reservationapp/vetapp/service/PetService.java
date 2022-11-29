@@ -1,5 +1,6 @@
 package com.agnieszka.reservationapp.vetapp.service;
 
+import com.agnieszka.reservationapp.vetapp.model.Client;
 import com.agnieszka.reservationapp.vetapp.model.Pet;
 import com.agnieszka.reservationapp.vetapp.repository.AppUserRepository;
 import com.agnieszka.reservationapp.vetapp.repository.ClientRepository;
@@ -22,7 +23,7 @@ public class PetService {
     private final AppUserRepository appUserRepository;
 
     @Transactional
-    public Pet createPet(Pet pet, String name) {
+    public Pet createPet(Pet pet, Client client) {
 
         Pet pet1 = new Pet(
                 pet.getSpecies(),
@@ -31,6 +32,10 @@ public class PetService {
                 pet.getAge()
         );
 
+        client.getPets().add(pet1);
+        clientRepository.save(client);
         return petRepository.save(pet1);
     }
+
+
 }

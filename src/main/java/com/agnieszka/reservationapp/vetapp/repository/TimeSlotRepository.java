@@ -10,7 +10,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 @Repository
-@Transactional(readOnly = true)
+@Transactional
 public interface TimeSlotRepository {
 
     List<TimeSlot> findAll();

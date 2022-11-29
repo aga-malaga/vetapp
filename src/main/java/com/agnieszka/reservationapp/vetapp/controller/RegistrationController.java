@@ -4,6 +4,8 @@ import com.agnieszka.reservationapp.vetapp.model.appUser.AppUser;
 import com.agnieszka.reservationapp.vetapp.model.registration.RegistrationRequest;
 import com.agnieszka.reservationapp.vetapp.model.registration.RegistrationService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

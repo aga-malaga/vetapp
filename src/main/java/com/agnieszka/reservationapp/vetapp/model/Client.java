@@ -6,8 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -23,9 +22,8 @@ public class Client {
     private String name;
     private String surname;
 
-    @ManyToOne
-    @JoinColumn(name = "pet_id")
-    private Pet petGroup;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Pet> pets = new HashSet<>();
 
     public Client(final String name, final String surname) {
         this.name = name;
