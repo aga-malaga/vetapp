@@ -16,4 +16,6 @@ public interface DoctorRepository  {
 
     boolean existsById(Long id);
     Doctor save(Doctor entity);
+
+    void deleteById(Long id);
 }

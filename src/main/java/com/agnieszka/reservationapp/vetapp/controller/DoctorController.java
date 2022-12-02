@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -26,6 +27,11 @@ class DoctorController {
     DoctorController(final DoctorRepository doctorRepository, final DoctorService doctorService) {
         this.doctorRepository = doctorRepository;
         this.doctorService = doctorService;
+    }
+
+    @GetMapping("/hello")
+    public String getHello() {
+        return "Hello, time at the server is " + LocalDateTime.now();
     }
 
     @GetMapping(params = {"!sort", "!page", "!size"})
@@ -48,6 +54,15 @@ class DoctorController {
         return doctorRepository.findById(id)
                 .map(ResponseEntity::ok)
                   .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Doctor> deleteDoctor(@PathVariable Long id){
+        if (!doctorRepository.existsById(id)){
+            return ResponseEntity.notFound().build();
+        }
+        doctorRepository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
