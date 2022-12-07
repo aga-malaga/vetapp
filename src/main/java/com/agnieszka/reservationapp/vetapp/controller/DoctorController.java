@@ -29,10 +29,6 @@ class DoctorController {
         this.doctorService = doctorService;
     }
 
-    @GetMapping("/hello")
-    public String getHello() {
-        return "Hello, time at the server is " + LocalDateTime.now();
-    }
 
     @GetMapping(params = {"!sort", "!page", "!size"})
     public ResponseEntity<List<Doctor>> getAllDoctors() {
