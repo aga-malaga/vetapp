@@ -10,7 +10,6 @@ function DisplayCalendar() {
 
     return (
         <div className='calendar-container'>
-            <h1 className='header'>React Calendar</h1>
             <div>
                 <Calendar onChange={setDate} value={date} onClickDay={() => setShowTime(true)}/>
             </div>

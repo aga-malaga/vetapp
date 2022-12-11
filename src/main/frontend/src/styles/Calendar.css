@@ -35,14 +35,14 @@ abbr[title] {
     border-radius: 6px;
 }
 .react-calendar__tile--now {
-    background: #6f48eb33;
+    background: #e4d5da;
     border-radius: 6px;
     font-weight: bold;
     color: #e4d5da;
 }
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
-    background: #6f48eb33;
+    background: #e4d5da;
     border-radius: 6px;
     font-weight: bold;
     color: #e4d5da;
