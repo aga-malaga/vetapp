@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
-
+import '../styles/Times.css';
 function Times(props) {
 
     const [slots, setSlots] = useState([]);
@@ -34,14 +34,14 @@ function Times(props) {
         <div className="times">
             {slots.map(slot => {
                 return (
-                    <div>
-                        <button onClick={(e)=> displayInfo(e)}> {parseDate(slot.start)} </button>
+                    <div key={slot.id}>
+                        <button className="button-4" onClick={(e)=> displayInfo(e)}> {parseDate(slot.start)} </button>
                     </div>
                 )
             })}
-            <div>
-                {info ? `Your appointment is set to ${event} ${props.date.toDateString()}` : null}
-            </div>
+            {/*<div>*/}
+            {/*    {info ? `Your appointment is set to ${event} ${props.date.toDateString()}` : null}*/}
+            {/*</div>*/}
         </div>
     )
 }

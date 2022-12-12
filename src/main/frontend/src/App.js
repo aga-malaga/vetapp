@@ -1,21 +1,33 @@
-import React, {Component} from 'react';
-import Navbar from './components/Navbar';
-import Home from "./components/Home"
+import React, {useState} from 'react';
 import DisplayCalendar from "./components/DisplayCalendar";
-import Times from "./components/Times";
+import displayCalendar from "./components/DisplayCalendar";
+import './styles/App.css';
+import RegisterForm from "./components/RegisterForm";
+import {Doctors} from "./components/Doctors";
+import {AddUser} from "./components/AddUser";
 
-class App extends Component {
+export default function App() {
 
-  render() {
+    const [isShown, setIsShown] = useState(false);
+    const handleClick = event => {
+        setIsShown(current => !current);
+        displayCalendar();
+    }
+
     return (
-        <div>
-            <Navbar />
-            <Home />
-           <DisplayCalendar />
-           <Times />
+        <div className='app-container'>
+            <div className="container">
+                <button onClick={handleClick} className="button-56">Book appointment</button>
+                {isShown && (
+                    <div>
+                        <DisplayCalendar/>
+                    </div>
+                )}
+            </div>
+            <Doctors/>
+            <AddUser/>
         </div>
     );
-  }
 }
 
-export default App;
+

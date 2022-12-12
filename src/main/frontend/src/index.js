@@ -3,11 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
-);
+    <div className="theme">
+        <Navbar/>
+        <Home/>
+        <style>{'body {background-color: #e4d5da; }'}</style>
+        {/*<App/>*/}
+    </div>
+)
+;
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
