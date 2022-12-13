@@ -1,36 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Giga&display=swap');
 .container {
-    /*width: 640px;*/
-    /*margin: 0 auto;*/
-    /*padding: 100px 0;*/
+    margin: 0 auto;
     display: flex;
-    flex-wrap: wrap;
+    font-family: 'Lexend Giga', sans-serif;
     justify-content: center;
-    background-color: #e4d5da;
-    text-align: center;
-    /*background-position: center;*/
-}
-
-.head {
-    width: auto;
-    font-family: Inter, sans-serif;
-    color: black;
-    align-self: center;
-    font-size: 150%;
-}
-
-.p1 {
-    flex-direction: column;
-    text-indent: 50px;
-    letter-spacing: 3px;
-}
-
-.app-img {
-    width: 20%;
-    height: auto;
     align-items: center;
 }
 
-*. {
-    box-sizing: border-box;
+.row {
+    justify-content: center;
+    align-items: center;
 }
+
+.button-56 {
+    display: inline-flex;
+}
+
+
 

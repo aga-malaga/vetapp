@@ -1,34 +1,32 @@
 import {useEffect, useState} from "react";
 import "../styles/Doctors.css";
+import {Dropdown} from "react-bootstrap";
 
-export const Doctors = () => {
+export default Doctors;
 
-    const [appState, setAppState] = useState({ doctors: []});
+function Doctors() {
 
-    useEffect( () => {
-        const url = "api/doctor";
-        fetch(url)
+    const [doctors, setDoctors] = useState({doctors: []});
+
+    const DOCTOR_API_BASE_URL = 'api/doctor/';
+
+    useEffect(() => {
+        fetch(DOCTOR_API_BASE_URL)
             .then(data => data.json())
-            .then( response => setAppState({doctors: response}));
-    })
+            .then(response => setDoctors({doctors: response}));
+    }, []);
+
 
     return (
-        <>
-            {appState.doctors.map( doctor => {
-               return (
-                   <div key={doctor.id}>
-                       <button className='button-52'>
-                       Name: {doctor.name}
-                       Surname: {doctor.surname}
-                       Medical Specialty: {doctor.medicalSpecialty}
-                       </button>
-                   </div>
-               )
-            })}
-
-
-        </>
-
-
+        <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                Dropdown Button
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+            {doctors.doctors.map(doctor => (
+                            <Dropdown.Item key={doctor.id}>{doctor.name} {doctor.surname}</Dropdown.Item>
+                    ))}
+            </Dropdown.Menu>
+        </Dropdown>
     )
-}
+};

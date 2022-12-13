@@ -1,15 +1,15 @@
-.app-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+/*.app-container {*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(3, 1fr);*/
 
-}
+/*}*/
 
-.container {
-    display: inline-flex;
-    gap: 20px;
-    grid-template-columns: repeat(12, 1fr);
-    background-color: #e4d5da;
-}
+/*.container {*/
+/*    display: inline-flex;*/
+/*    gap: 20px;*/
+/*    grid-template-columns: repeat(12, 1fr);*/
+/*    background-color: #e4d5da;*/
+/*}*/
 
 
 .button-56 {

@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Giga&display=swap');
+
+.p1 {
+    font-family: 'Lexend Giga', sans-serif;
+}
+
+.form {
+    background-color: white;
+    border-radius: 5px;
+    width: 550px;
+    margin: 10px 50px 20px 10%;
+    padding: 20px;
+}
+
+.form-body {
+    text-align: left;
+    padding: 20px 10px;
+}
+
+.form-body > * {
+    padding: 5px;
+}
+
+.form__label {
+    width: 40%;
+}
+
+.form_input {
+    width: 60%;
+}
+
+.footer {
+    text-align: center;
+}
+
+.btn {
+    border: 1px solid #111111;
+    background-color: #e4d5da;
+}
