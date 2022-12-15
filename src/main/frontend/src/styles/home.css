@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Giga&display=swap');
+
 .container {
-    margin: 0 auto;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     font-family: 'Lexend Giga', sans-serif;
     justify-content: center;
-    align-items: center;
+    position: relative;
 }
 
 .row {
-    justify-content: center;
     align-items: center;
 }
 
@@ -16,5 +17,49 @@
     display: inline-flex;
 }
 
+.searchContainer {
+    display:flex;
+    height: 40px;
+    background-color: white;
+    border: 1px solid;
+    align-items: center;
+    justify-content: space-around;
+    padding:10px 0px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: -25px;
+    width: 100%;
+
+}
+.headerBtn {
+    background-color: #ff8295;
+    color: white;
+    font-weight: 500;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.headerSearchText {
+    color: lightslategray;
+    cursor: pointer;
+}
+
+.date {
+    position: absolute;
+    top: 40px;
+
+}
+
+.visitList {
+    background-color: white;
+    /*position: absolute;*/
+    display: flex;
+    justify-content: space-between;
+    top:40px;
+    gap: 10px;
+    border: none;
+    width: 100%;
+}
 
 

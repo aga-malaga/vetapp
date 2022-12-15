@@ -14,8 +14,7 @@ export default function App() {
         <div>
             <Navbar/>
             <Home/>
-            <RegistrationForm/>
-            <Doctors/>
+            {/*<Doctors/>*/}
         </div>
     );
 }

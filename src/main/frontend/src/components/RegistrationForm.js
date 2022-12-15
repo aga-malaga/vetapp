@@ -56,7 +56,7 @@ function RegistrationForm() {
     }
 
     return (
-        <div>
+        <div className="formBody">
             <div className="form">
                 <div className="form-body">
                     <p className="p1">Registration Form</p>

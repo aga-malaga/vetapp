@@ -1,32 +1,42 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import "../styles/Doctors.css";
-import {Dropdown} from "react-bootstrap";
+import {ListGroup, ListGroupItem} from "react-bootstrap";
+import axios from "axios";
 
 export default Doctors;
 
-function Doctors() {
+function Doctors({id}) {
+    const [openVisitType, setVisitType] = useState(false);
 
-    const [doctors, setDoctors] = useState({doctors: []});
+    const [doctors, setDoctors] = useState([]);
 
     const DOCTOR_API_BASE_URL = 'api/doctor/';
 
     useEffect(() => {
-        fetch(DOCTOR_API_BASE_URL)
-            .then(data => data.json())
-            .then(response => setDoctors({doctors: response}));
-    }, []);
+            getDoctors()
+        }, []
+    )
+
+    const getDoctors = () => {
+        axios.get(DOCTOR_API_BASE_URL).then((response) => {
+            setDoctors(response.data)
+            console.log(response.data);
+        });
+    };
 
 
     return (
-        <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Dropdown Button
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-            {doctors.doctors.map(doctor => (
-                            <Dropdown.Item key={doctor.id}>{doctor.name} {doctor.surname}</Dropdown.Item>
-                    ))}
-            </Dropdown.Menu>
-        </Dropdown>
+        <div>
+            {doctors.map(doctor => {
+                return (
+                    <ListGroup>
+                        <ListGroupItem className="doctorsList" key={doctor.id} action onClick={() =>
+                            setVisitType(!openVisitType)}>
+                            {doctor.name + doctor.surname}
+                        </ListGroupItem>
+                    </ListGroup>
+                )
+            })}
+        </div>
     )
-};
+}
