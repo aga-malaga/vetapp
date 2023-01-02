@@ -1,25 +1,22 @@
 package com.agnieszka.reservationapp.vetapp.service;
 
 import com.agnieszka.reservationapp.vetapp.model.Appointment;
+import com.agnieszka.reservationapp.vetapp.repository.AppUserRepository;
 import com.agnieszka.reservationapp.vetapp.repository.AppointmentRepository;
-import com.agnieszka.reservationapp.vetapp.repository.ClientRepository;
 import com.agnieszka.reservationapp.vetapp.repository.TimeSlotRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ClientService {
+@AllArgsConstructor
+public class AppointmentService {
 
-    private final ClientRepository clientRepository;
     private final AppointmentRepository appointmentRepository;
-
     private final TimeSlotRepository timeSlotRepository;
+    private final AppUserRepository appUserRepository;
 
-    ClientService(final ClientRepository clientRepository, final AppointmentRepository appointmentRepository, final TimeSlotRepository timeSlotRepository) {
-        this.clientRepository = clientRepository;
-        this.appointmentRepository = appointmentRepository;
-        this.timeSlotRepository = timeSlotRepository;
-    }
+
 
     @Transactional
     public Appointment makeAppointment(Appointment request){
@@ -36,7 +33,7 @@ public class ClientService {
         Appointment appointment = new Appointment(
                 request.getDescription(),
                 request.getDateTime(),
-                clientRepository.findById(request.getClient().getId()).orElseThrow()
+                appUserRepository.findById(request.getAppUser().getId()).orElseThrow()
         );
         appointment.setTimeSlot(timeSlotRepository.findByStart(request.getDateTime()));
         return appointmentRepository.save(appointment);

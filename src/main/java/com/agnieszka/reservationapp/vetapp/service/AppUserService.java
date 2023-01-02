@@ -32,6 +32,7 @@ public class AppUserService implements UserDetailsService {
     private String adminPassword;
     @Value("${spring.security.user.roles}")
     private String adminRole;
+
     public AppUserService(final AppUserRepository appUserRepository, final PasswordEncoder passwordEncoder, final ConfirmationTokenService confirmationTokenService) {
         this.appUserRepository = appUserRepository;
         this.passwordEncoder = passwordEncoder;
@@ -39,20 +40,27 @@ public class AppUserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
-        if (email.equals("admin")) {
-            return User.builder().username(adminUserName).password(passwordEncoder.encode(adminPassword)).authorities(AppUserRole.ADMIN).build();
-        }
-        return appUserRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND, email)));
+    public UserDetails loadUserByUsername(final String userName) throws UsernameNotFoundException {
+        AppUser appUser = appUserRepository
+                .findByUsername(userName)
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        "user with username: " + userName + " does not exist"));
+        return User.withUsername(userName)
+                .password(appUser.getPassword())
+                .roles(AppUserRole.CLIENT.getAuthority())
+                .build();
     }
 
     @Transactional
     public String signUpUser(AppUser appUser) {
         final boolean present = appUserRepository
-                .findByEmail(appUser.getEmail())
+                .findByUsername(appUser.getUsername())
                 .isPresent();
         if (present) {
+            if (appUserRepository.findByUsername(appUser.getUsername()).get().getEnabled()) {
+
+
+            }
             //todo check if attributes are the same and
             //todo if email not confirmed send confirmation email
 

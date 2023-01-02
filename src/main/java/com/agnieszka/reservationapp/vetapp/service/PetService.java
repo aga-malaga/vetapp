@@ -1,10 +1,10 @@
 package com.agnieszka.reservationapp.vetapp.service;
 
-import com.agnieszka.reservationapp.vetapp.model.Client;
 import com.agnieszka.reservationapp.vetapp.model.Pet;
+import com.agnieszka.reservationapp.vetapp.model.appUser.AppUser;
 import com.agnieszka.reservationapp.vetapp.repository.AppUserRepository;
-import com.agnieszka.reservationapp.vetapp.repository.ClientRepository;
 import com.agnieszka.reservationapp.vetapp.repository.PetRepository;
+import com.agnieszka.reservationapp.vetapp.resources.request.PetDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
@@ -15,25 +15,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PetService {
 
-    private final ClientService clientService;
+    private final AppointmentService appointmentService;
     private final PetRepository petRepository;
-
-    private final ClientRepository clientRepository;
-
     private final AppUserRepository appUserRepository;
 
     @Transactional
-    public Pet createPet(Pet pet, Client client) {
+    public Pet createPet(PetDto petDto, AppUser appUser) {
 
         Pet pet1 = new Pet(
-                pet.getSpecies(),
-                pet.getName(),
-                pet.getSex(),
-                pet.getAge()
+                petDto.species(),
+                petDto.name(),
+                petDto.sex(),
+                petDto.age()
         );
 
-        client.getPets().add(pet1);
-        clientRepository.save(client);
+        appUser.getPets().add(pet1);
+        appUserRepository.save(appUser);
         return petRepository.save(pet1);
     }
 

@@ -1,17 +1,12 @@
 package com.agnieszka.reservationapp.vetapp.model.registration;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import javax.validation.constraints.NotEmpty;
 
-@Getter
-@AllArgsConstructor
-@EqualsAndHashCode
-@ToString
-public class RegistrationRequest {
-    private final String firstName;
-    private final String lastName;
-    private final String email;
-    private final String password;
+public record RegistrationRequest(@NotEmpty(message = "Enter your firstname") String firstName,
+                                  @NotEmpty(message = "Enter your lastName") String lastName,
+                                  @NotEmpty(message = "Enter your username") String username,
+                                  @NotEmpty(message = "Enter your email") String email,
+                                  @NotEmpty(message = "Enter your password") String password,
+                                  @NotEmpty(message = "Confirm your password") String confirmPassword) {
+
 }

@@ -17,8 +17,6 @@ public interface TimeSlotRepository {
 
     TimeSlot findByStart(ZonedDateTime dateTime);
 
-    List<TimeSlot> findAllById(Long id);
-
     TimeSlot save(TimeSlot slot);
 
     @Transactional
@@ -26,5 +24,5 @@ public interface TimeSlotRepository {
     @Query("UPDATE TimeSlot a " +
             "SET a.booked = TRUE " +
             "WHERE a.start = ?1")
-    int bookTimeSlot(ZonedDateTime dateTime);
+    void bookTimeSlot(ZonedDateTime dateTime);
 }

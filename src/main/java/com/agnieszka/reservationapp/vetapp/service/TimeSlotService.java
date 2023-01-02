@@ -17,16 +17,15 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @Service
-public class TimeSlotService {
+class TimeSlotService {
 
     private final TimeSlotRepository timeSlotRepository;
 
 
-    public List<TimeSlot> createSchedule(LocalDate date, LocalTime start, LocalTime stop, String interval, Doctor doctor) {
+    List<TimeSlot> createSchedule(LocalDate date, LocalTime start, LocalTime stop, String interval, Doctor doctor) {
         long intervaL = Long.parseLong(interval);
         ZoneId z = ZoneId.of("Europe/Warsaw");
         List<TimeSlot> slots = new ArrayList<>();
-        int count = 0;
         while (start.isBefore(stop)) {
             final TimeSlot timeSlot = timeSlotRepository.save(
                     new TimeSlot(
@@ -36,12 +35,11 @@ public class TimeSlotService {
                     ));
             slots.add(timeSlot);
             start = start.plusMinutes(intervaL);
-            count++;
         }
         return slots;
     }
 
-    public List<TimeSlot> getSchedule(){
+    List<TimeSlot> getSchedule(){
         return timeSlotRepository.findAll();
     }
 

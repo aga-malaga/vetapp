@@ -1,5 +1,6 @@
 package com.agnieszka.reservationapp.vetapp.model;
 
+import com.agnieszka.reservationapp.vetapp.model.appUser.AppUser;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,14 +29,14 @@ public class Appointment {
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(
             nullable = false,
-            name = "client_id"
+            name = "appUser_id"
     )
-    private Client client;
+    private AppUser appUser;
 
-    public Appointment(final String description, final ZonedDateTime dateTime, final Client client) {
+    public Appointment(final String description, final ZonedDateTime dateTime, final AppUser appUser) {
         this.description = description;
         this.dateTime = dateTime;
-        this.client = client;
+        this.appUser = appUser;
     }
 }
 

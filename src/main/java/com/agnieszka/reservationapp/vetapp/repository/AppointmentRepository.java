@@ -1,7 +1,7 @@
 package com.agnieszka.reservationapp.vetapp.repository;
 
 import com.agnieszka.reservationapp.vetapp.model.Appointment;
-import com.agnieszka.reservationapp.vetapp.model.Client;
+import com.agnieszka.reservationapp.vetapp.model.appUser.AppUser;
 import org.springframework.stereotype.Repository;
 
 import java.time.ZonedDateTime;
@@ -15,7 +15,7 @@ public interface AppointmentRepository {
 
     Optional<Appointment> findByDateTime(ZonedDateTime dateTime);
 
-    Optional<List<Appointment>> findByClient(Client client);
+    Optional<List<Appointment>> findByAppUser(AppUser appUser);
 
     Optional<Appointment> findById(Long id);
 

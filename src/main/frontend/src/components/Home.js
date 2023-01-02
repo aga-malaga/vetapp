@@ -1,15 +1,17 @@
 import '../styles/home.css';
 import React, {useState} from 'react';
 import {Col, Container, Image, ListGroup, ListGroupItem, Row} from "react-bootstrap";
-import displayCalendar from "./DisplayCalendar";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCalendar, faList, faUserDoctor} from "@fortawesome/free-solid-svg-icons";
 import Calendar from "react-calendar";
 import RegistrationForm from "./RegistrationForm";
 import Doctors from "./Doctors";
+import 'react-calendar/dist/Calendar.css';
+import '../styles/Calendar.css';
 
 
 export default function Home() {
+
 
     const [value, onChange] = useState(new Date());
     const [openDate, setOpenDate] = useState(false);
@@ -17,18 +19,13 @@ export default function Home() {
     const [openDoctors, setOpenDoctors] = useState(false);
 
     const visitTypes = ["Skin and ear infections", 'Eye issues', "Diarrhea and vomiting", "Urinary problems",
-    "Preventative wellness", "Toxin ingestion", "Other"];
+        "Preventative wellness", "Toxin ingestion", "Other"];
 
 
     const [isShown, setIsShown] = useState(false);
     const handleClick = event => {
         setIsShown(current => !current);
-        displayCalendar();
     }
-    const handleClick2 = event => {
-        setIsShown(current => !current);
-    }
-
 
     return (
         <Container>
@@ -43,8 +40,8 @@ export default function Home() {
                                 <RegistrationForm/>
                             </div>
                         )}
-                        <a href="/api/client">
-                        <button className="button-56" >Log in</button>
+                        <a href="/api/appUser">
+                            <button className="button-56">Log in</button>
                         </a>
                     </div>
                 </Col>
@@ -52,21 +49,22 @@ export default function Home() {
             </Row>
             {/*<Row>*/}
             <div className="searchContainer">
-                <Col>
+                <Col lg={3} sm={12}>
                     <div className="headerSearch">
                         <FontAwesomeIcon icon={faUserDoctor}/>
-                        <span onClick={() => setOpenDoctors(!openDoctors)} className="headerSearchText">
-                            Choose your doctor
-                        </span>
-                        {openDoctors && (
-                            <Doctors/>
-                        )}
+                        <span onClick={() => setOpenDoctors(!openDoctors)}
+                              className="headerSearchText"> {Doctors} </span>
+                        {/*{openDoctors && (<Doctors*/}
+                        {/*    onChange={onChange}*/}
+                        {/*    value={value}*/}
+                        {/*    className="date"*/}
+                        {/*/>)}*/}
                     </div>
                 </Col>
-                <Col>
+                <Col lg={3} sm={12}>
                     <div className="headerSearch">
                         <FontAwesomeIcon icon={faCalendar}/>
-                        <span onClick={() => setOpenDate(!openDate)} className="headerSearchText"> Date</span>
+                        <span onClick={() => setOpenDate(!openDate)} className="headerSearchText"> Date </span>
                         {openDate && (<Calendar
                             onChange={onChange}
                             value={value}
@@ -74,7 +72,7 @@ export default function Home() {
                         />)}
                     </div>
                 </Col>
-                <Col>
+                <Col lg={3} sm={12}>
                     <div className="headerSearch">
                         <FontAwesomeIcon icon={faList}/>
                         <span onClick={() => setVisitType(!openVisitType)} className="headerSearchText">
@@ -83,7 +81,8 @@ export default function Home() {
                         {openVisitType && (visitTypes.map(visit => {
                             return (
                                 <ListGroup>
-                                    <ListGroupItem className="visitList" key={visit} action onClick={() => setVisitType(!openVisitType)}>
+                                    <ListGroupItem className="visitList" key={visit} action
+                                                   onClick={() => setVisitType(!openVisitType)}>
                                         {visit}
                                     </ListGroupItem>
                                 </ListGroup>
@@ -91,7 +90,7 @@ export default function Home() {
                         }))}
                     </div>
                 </Col>
-                <Col>
+                <Col lg={3} sm={12}>
                     <div className="headerSearch">
                         <button className="headerBtn"> Search</button>
                     </div>

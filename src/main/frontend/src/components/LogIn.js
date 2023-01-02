@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-function LogIn() {
+function Login() {
 
     const [log, setLog] = useState([]);
 
-    const DOCTOR_API_BASE_URL = 'api/doctor/';
+    const DOCTOR_API_BASE_URL = '/login';
 
     useEffect(() => {
             getDoctors()

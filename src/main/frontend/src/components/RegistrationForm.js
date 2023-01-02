@@ -10,6 +10,8 @@ function RegistrationForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [openRegister, setOpenRegister] = useState(false);
+
 
     const handleInputChange = (e) => {
         const {id , value} = e.target;
@@ -112,7 +114,13 @@ function RegistrationForm() {
                     </div>
                 </div>
                 <div class="footer">
-                    <button onClick={(event) => handleSubmit()} type="submit" className="btn">Register</button>
+                    <button onClick={(event) => {
+                        handleSubmit(event);
+                        setOpenRegister(!openRegister);
+                    }} type="submit" className="btn">Register</button>
+                    {openRegister && (
+                        <p className="thankyou">Thank you for registering</p>
+                    )}
                 </div>
             </div>
         </div>

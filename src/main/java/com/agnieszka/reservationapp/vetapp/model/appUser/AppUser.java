@@ -1,23 +1,20 @@
 package com.agnieszka.reservationapp.vetapp.model.appUser;
 
+import com.agnieszka.reservationapp.vetapp.model.Pet;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Objects;
+import java.util.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table
 public class AppUser implements UserDetails {
 
     @Id
@@ -26,10 +23,14 @@ public class AppUser implements UserDetails {
     private String firstName;
     private String lastName;
 
+    private String username;
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Pet> pets = new HashSet<>();
 
     private Boolean locked = false;
 
@@ -38,6 +39,7 @@ public class AppUser implements UserDetails {
     public AppUser(
             final String firstName,
             final String lastName,
+            final String username,
             final String email,
             final String password,
             final AppUserRole appUserRole
@@ -45,6 +47,7 @@ public class AppUser implements UserDetails {
 
         this.firstName = firstName;
         this.lastName = lastName;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.appUserRole = appUserRole;
@@ -64,7 +67,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override
@@ -90,13 +93,13 @@ public class AppUser implements UserDetails {
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         final AppUser appUser = (AppUser) o;
-        return id != null && Objects.equals(id, appUser.id);
+        return Objects.equals(id, appUser.id) && Objects.equals(firstName, appUser.firstName) && Objects.equals(lastName, appUser.lastName) && Objects.equals(email, appUser.email) && Objects.equals(password, appUser.password) && appUserRole == appUser.appUserRole && Objects.equals(pets, appUser.pets) && Objects.equals(locked, appUser.locked) && Objects.equals(enabled, appUser.enabled);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(id, firstName, lastName, email, password, appUserRole, pets, locked, enabled);
     }
 }
