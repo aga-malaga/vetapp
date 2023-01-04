@@ -30,7 +30,7 @@ class AppointmentController {
         return ResponseEntity.ok(appointmentService.makeAppointment(appointment));
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public void deleteAppointment(@PathVariable Long id) {
         appointmentRepository.deleteById(id);
     }

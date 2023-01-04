@@ -8,7 +8,8 @@ import RegistrationForm from "./RegistrationForm";
 import Doctors from "./Doctors";
 import 'react-calendar/dist/Calendar.css';
 import '../styles/Calendar.css';
-
+import Login from "./Login";
+import Registration from "./Registration";
 
 export default function Home() {
 
@@ -23,8 +24,14 @@ export default function Home() {
 
 
     const [isShown, setIsShown] = useState(false);
+    const [isLoginShown, setIsLoginShown] = useState(false);
+
     const handleClick = event => {
         setIsShown(current => !current);
+    }
+
+    const handleLoginClick = event => {
+        setIsLoginShown(current => !current);
     }
 
     return (
@@ -40,9 +47,12 @@ export default function Home() {
                                 <RegistrationForm/>
                             </div>
                         )}
-                        <a href="/api/appUser">
-                            <button className="button-56">Log in</button>
-                        </a>
+                            <button onClick={handleLoginClick} className="button-56">Log in</button>{
+                        isLoginShown && (
+                            <div>
+                            <Login/>
+                            </div>
+                        )}
                     </div>
                 </Col>
                 <Col><Image src="/img3.jpg" alt="dog paws" className="img-fluid"/></Col>
